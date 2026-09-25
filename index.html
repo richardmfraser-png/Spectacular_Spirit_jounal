@@ -4,11 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0A3554">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link rel="icon" type="image/png" sizes="192x192" href="ssj-icon-192-v21.png?v=21">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Spirit Journal">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest-v21.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon-v21.png?v=21">
 <title>Spectacular Spirit Journal</title>
 <style>
 :root{--deep:#0A3554;--navy:#0f4166;--ocean:#1b6f97;--sky:#7fc7e4;--mist:#e8f6fb;--foam:#f7fcfe;--ink:#163443;--muted:#607886;--gold:#f5c65d;--amber:#e8aa42;--yellow:#f4d53b;--line:#d4e7ef;--good:#1a7f71;--card:rgba(255,255,255,.93);--shadow:0 14px 40px rgba(8,44,66,.13);--radius:22px}
@@ -65,7 +69,7 @@ main{padding:16px}
 hr{border:0;border-top:1px solid var(--line);margin:16px 0}
 
 .setup{position:fixed;inset:0;z-index:400;background:#071f33;color:white;display:none;overflow:auto}.setup.open{display:block}
-.setup-bg{position:fixed;inset:0;background:url('assets/images/feature.jpg') center 36%/cover no-repeat;filter:saturate(1.03)}.setup-scrim{position:fixed;inset:0;background:linear-gradient(180deg,rgba(6,25,42,.22),rgba(5,28,45,.82) 48%,rgba(5,28,45,.96))}
+.setup-bg{position:fixed;inset:0;background:url('feature.jpg') center 36%/cover no-repeat;filter:saturate(1.03)}.setup-scrim{position:fixed;inset:0;background:linear-gradient(180deg,rgba(6,25,42,.22),rgba(5,28,45,.82) 48%,rgba(5,28,45,.96))}
 .setup-inner{position:relative;z-index:2;max-width:680px;margin:0 auto;padding:calc(30px + env(safe-area-inset-top)) 18px 50px}.setup-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.setup-top button{color:white;border-color:rgba(255,255,255,.32)}
 .setup-title{font-size:38px;line-height:1.03;margin:18px 0 10px}.setup-copy{line-height:1.5;opacity:.9;max-width:600px}.setup-card{background:rgba(249,253,254,.97);color:var(--ink);border-radius:24px;padding:18px;margin-top:20px;box-shadow:0 18px 60px rgba(0,0,0,.22)}
 .setup-card h2{margin:0 0 8px}.setup-card .field input,.setup-card .field select,.setup-card .field textarea{background:white}.setup-actions{display:flex;gap:9px;margin-top:12px}.setup-actions>*{flex:1}
@@ -161,7 +165,7 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
         <div id="todayCommitments"></div>
       </div>
       <div class="subtle-hero">
-        <div class="bg" style="background-image:url('assets/images/feature.jpg')"></div><div class="scrim"></div>
+        <div class="bg" style="background-image:url('feature.jpg')"></div><div class="scrim"></div>
         <div class="copy"><div class="badge">Signature image</div><h3 style="margin:8px 0 6px">The emotional centre of the app</h3><div style="font-size:13px;line-height:1.45;max-width:540px">Rough in the foreground. Calm on the horizon. Light breaking through. Water, motion and life holding it together.</div></div>
       </div>
     </section>
@@ -169,7 +173,7 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
     <section id="tab-journal" class="tab">
       <div class="section-title"><h2>Journal</h2><small>intention, reflection, and notes</small></div>
       <div class="subtle-hero">
-        <div class="bg" style="background-image:url('assets/images/feature.jpg');background-position:center 35%"></div><div class="scrim"></div>
+        <div class="bg" style="background-image:url('feature.jpg');background-position:center 35%"></div><div class="scrim"></div>
         <div class="copy"><div class="badge">Spectacular Spirit Journal</div><h3 style="margin:8px 0 6px">Write with honesty. Re-read with compassion.</h3><div style="font-size:13px;line-height:1.45;max-width:540px">This is the front-and-centre journaling home: freeform writing, morning intention, evening reflection, and a searchable history.</div></div>
       </div>
       <div class="card">
@@ -205,7 +209,7 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
     <section id="tab-goals" class="tab">
       <div class="section-title"><h2>Goals & milestones</h2><button class="btn secondary small" onclick="openGoal()">＋ Add goal</button></div>
       <div class="subtle-hero">
-        <div class="bg" style="background-image:url('assets/images/blossoms.jpg');background-position:center 32%"></div><div class="scrim"></div>
+        <div class="bg" style="background-image:url('blossoms.jpg');background-position:center 32%"></div><div class="scrim"></div>
         <div class="copy"><div class="badge">Purpose in motion</div><h3 style="margin:8px 0 6px">Define where you're going.</h3><div style="font-size:13px;line-height:1.45;max-width:540px">Each goal can hold a target date, a why, linked commitments, and optional milestones. The point is not pressure. The point is alignment.</div></div>
       </div>
       <div id="goalList"></div>
@@ -237,7 +241,7 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
     <section id="tab-wisdom" class="tab">
       <div class="section-title"><h2>Readings & wisdom</h2><small>selected materials by category</small></div>
       <div class="subtle-hero">
-        <div class="bg" style="background-image:url('assets/images/forestlight.jpg');background-position:center 40%"></div><div class="scrim"></div>
+        <div class="bg" style="background-image:url('forestlight.jpg');background-position:center 40%"></div><div class="scrim"></div>
         <div class="copy"><div class="badge">Read widely. Keep what serves.</div><h3 style="margin:8px 0 6px">Wisdom without dogma.</h3><div style="font-size:13px;line-height:1.45;max-width:540px">This library is organized by theme: Spiritual, Motivational, Leadership, Wellness, Reflection/Philosophy, and Purpose/Character. Each category includes concise readings and suggested videos. You can also add your own resources.</div></div>
       </div>
       <div id="wisdomFilters" class="filter-row"></div>
@@ -261,9 +265,9 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
     </section>
 
     <section id="tab-help" class="tab">
-      <div class="section-title"><h2>Help & FAQ</h2><small>quick start and common questions</small></div>
+      <div class="section-title"><h2>Help & FAQ</h2><small>v2.1 • quick start and common questions</small></div>
       <div class="subtle-hero">
-        <div class="bg" style="background-image:url('assets/images/feature.jpg');background-position:center 38%"></div><div class="scrim"></div>
+        <div class="bg" style="background-image:url('feature.jpg');background-position:center 38%"></div><div class="scrim"></div>
         <div class="copy"><div class="badge">Start simple</div><h3 style="margin:8px 0 6px">You do not have to configure everything at once.</h3><div style="font-size:13px;line-height:1.45;max-width:560px">Begin with four commitments, one or two meaningful goals, a few minutes of reflection, and adjust the system as your practice becomes clearer.</div></div>
       </div>
       <div class="card">
@@ -315,7 +319,7 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
 
 <script>
 const KEY='spectacularSpiritJournalV1';
-const heroMap={today:{img:'assets/images/feature.jpg',title:'Rough. Ragged. Calm. Serene. Full of light.',text:'A structured but compassionate app for spiritual growth, journaling, mental and physical wellness, and purposeful living.',quote:'The surface can be turbulent while the horizon remains calm.'},journal:{img:'assets/images/goldsea.jpg',title:'Spectacular Spirit Journal',text:'Journaling sits at the centre of this build: intention, reflection, honest writing, and a history you can learn from.',quote:'Write close to the truth. Read back with mercy.'},commitments:{img:'assets/images/wavewide.jpg',title:'Commit to the practices that shape you',text:'Define mental and physical commitments, then break them into sub-branches when the detail matters.',quote:'Consistency is architecture. One action at a time.'},goals:{img:'assets/images/blossoms.jpg',title:'Goals with meaning, not pressure',text:'Describe the destination, why it matters, and the milestones that make it real.',quote:'Purpose becomes visible when it is named.'},meditation:{img:'assets/images/candles.jpg',title:'Stillness has its own strength',text:'Three simple audio experiences: chant, ocean breath, and soft bell. Press play, breathe, and return.',quote:'The return is the practice.'},wisdom:{img:'assets/images/forestlight.jpg',title:'Selected readings & videos',text:'A pluralistic library organized around spirit, motivation, leadership, wellness, reflection, and character.',quote:'Read widely. Keep what serves.'},progress:{img:'assets/images/horizon.jpg',title:'See the pattern, then adjust',text:'Track consistency, balance, and the small signals that show where your practice is helping or slipping.',quote:'Awareness → adjustment → consistency.'},help:{img:'assets/images/feature.jpg',title:'Help when you need it',text:'Quick start instructions, common questions, setup guidance and deployment notes live here.',quote:'Structure should make the practice easier, not heavier.'}};
+const heroMap={today:{img:'feature.jpg',title:'Rough. Ragged. Calm. Serene. Full of light.',text:'A structured but compassionate app for spiritual growth, journaling, mental and physical wellness, and purposeful living.',quote:'The surface can be turbulent while the horizon remains calm.'},journal:{img:'goldsea.jpg',title:'Spectacular Spirit Journal',text:'Journaling sits at the centre of this build: intention, reflection, honest writing, and a history you can learn from.',quote:'Write close to the truth. Read back with mercy.'},commitments:{img:'wavewide.jpg',title:'Commit to the practices that shape you',text:'Define mental and physical commitments, then break them into sub-branches when the detail matters.',quote:'Consistency is architecture. One action at a time.'},goals:{img:'blossoms.jpg',title:'Goals with meaning, not pressure',text:'Describe the destination, why it matters, and the milestones that make it real.',quote:'Purpose becomes visible when it is named.'},meditation:{img:'candles.jpg',title:'Stillness has its own strength',text:'Three simple audio experiences: chant, ocean breath, and soft bell. Press play, breathe, and return.',quote:'The return is the practice.'},wisdom:{img:'forestlight.jpg',title:'Selected readings & videos',text:'A pluralistic library organized around spirit, motivation, leadership, wellness, reflection, and character.',quote:'Read widely. Keep what serves.'},progress:{img:'horizon.jpg',title:'See the pattern, then adjust',text:'Track consistency, balance, and the small signals that show where your practice is helping or slipping.',quote:'Awareness → adjustment → consistency.'},help:{img:'feature.jpg',title:'Help when you need it',text:'Quick start instructions, common questions, setup guidance and deployment notes live here.',quote:'Structure should make the practice easier, not heavier.'}};
 const wisdomCategories=['Spiritual','Motivational','Leadership','Wellness','Reflection / Philosophy','Purpose / Character'];
 const wisdomLibrary={
  'Spiritual':[
@@ -364,7 +368,7 @@ function load(){try{state=JSON.parse(localStorage.getItem(KEY))}catch(e){}; if(!
 function save(){localStorage.setItem(KEY,JSON.stringify(state))}
 function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1900)}
 function init(){load(); if(!state.commitments.length){state.commitments=JSON.parse(JSON.stringify(defaultCommitments)); state.commitments.forEach(c=>c.id=uid()); save()} selectedModule=state.profile.defaultMeditation||'chant'; wisdomCategory=state.profile.defaultWisdom||'Spiritual'; renderAll(); registerSW(); if(!state.profile.onboardingStatus) setTimeout(()=>openSetup(),120)}
-function registerSW(){if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('service-worker.js').catch(()=>{})}
+function registerSW(){if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('service-worker.js?v=21', {updateViaCache:'none'}).catch(()=>{})}
 function renderAll(){let now=new Date();dateBadge.textContent=now.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}); profileName.value=state.profile.name||''; journeyName.value=state.profile.journeyName||'Spectacular Spirit Journal'; journeyDays.value=state.profile.durationDays||75; journeyStart.value=state.profile.startDate||isoDate(); renderDayBadge(); renderPriorities(); renderToday(); renderIntention(); renderCommitments(); renderGoals(); renderMeditation(); renderWisdom(); renderJournal(); renderProgress(); updateHero()}
 function renderDayBadge(){let start=new Date((state.profile.startDate||isoDate())+'T00:00:00'); let day=Math.max(1,Math.floor((new Date().setHours(0,0,0,0)-start)/86400000)+1); dayBadge.textContent=`Day ${day} of ${state.profile.durationDays||75}`; dayCount.textContent=`Day ${day} of ${state.profile.durationDays||75}`}
 function showTab(name,btn){currentTab=name; document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active')); document.getElementById('tab-'+name).classList.add('active'); document.querySelectorAll('.tabbtn').forEach(x=>x.classList.remove('active')); if(btn)btn.classList.add('active'); updateHero(); if(name==='progress') renderProgress(); if(name==='journal') renderJournal(); if(name==='wisdom') renderWisdom(); window.scrollTo({top:0,behavior:'smooth'})}

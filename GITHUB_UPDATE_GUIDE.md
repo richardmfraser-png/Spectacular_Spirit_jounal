@@ -1,43 +1,35 @@
-# GitHub Update Guide — Spectacular Spirit Journal v2
+# GitHub Update Guide — Spectacular Spirit Journal v2.1
 
-This package is structured so the contents can replace the current app files in your GitHub repository.
+This release specifically fixes missing photographs and the fallback blue "S" home-screen icon.
 
-## Files/folders to upload or replace
-Replace these at the repository web-app root:
-- `index.html`
-- `manifest.webmanifest`
-- `service-worker.js`
-- `assets/icons/`
-- `assets/images/`
+## Why the issue happened
+The prior release referenced photographs and icons inside nested `assets/...` folders. If those folders were not present in the deployed GitHub repository at exactly those paths, the app still loaded but the browser could not find the pictures or icon. The browser then generated a fallback home-screen icon.
 
-Also add/update the documentation files:
-- `QUICK_START.md`
-- `README.md`
-- `LOCKED_BRIEF.md`
-- `GITHUB_UPDATE_GUIDE.md`
-- `CHANGELOG.md`
+## What changed in v2.1
+- All photographs and install icons are now **flat files in the repository root**.
+- The manifest and HTML use those root-level filenames.
+- The install icon is a **photo-only crop of the signature wave / sunrise photograph** — no blue square and no letter `S`.
+- The service-worker cache version has changed and now claims the updated page immediately.
+- `ASSET_CHECK.html` lets you verify the photographs and icon after deployment.
 
-`Spectacular_Spirit_Journal_Standalone.html` is a convenient local preview and can also be kept in the repository, but GitHub Pages should serve `index.html`.
+## Update steps
+1. Open the v2.1 ZIP.
+2. Upload **every file** in the ZIP to the root of the same GitHub Pages repository. Do not omit the `.jpg`, `.png`, `.webmanifest`, or `service-worker.js` files.
+3. Replace the existing `index.html` and `service-worker.js` when GitHub asks.
+4. Commit the changes.
+5. Wait about a minute for GitHub Pages to redeploy.
+6. Open your normal app URL and refresh once or twice.
+7. Then open `ASSET_CHECK.html` at the same site address. Example: if your app is at `https://username.github.io/repository/`, the checker is `https://username.github.io/repository/ASSET_CHECK.html`.
+8. All seven photographs plus the home-screen icon should be visible.
 
-## Suggested update workflow
-1. Download and unzip the GitHub Update package.
-2. Back up your existing repository or create a branch.
-3. Drag the files/folders above into the repository root and choose **Replace** where prompted.
-4. Commit with a message such as: `Update Spectacular Spirit Journal to v2`.
-5. Push/commit to the branch GitHub Pages is serving.
-6. Wait for GitHub Pages to rebuild, then open the live URL and refresh once.
+## Important iPhone icon step
+Safari/iOS commonly keeps the image from an existing Home Screen shortcut. Updating the website does **not reliably replace an already-saved icon**.
 
-## Important: existing app data
-The local-storage key is deliberately unchanged from v1. If you deploy v2 at the **same live URL/origin**, existing browser data should remain available.
+After v2.1 is live:
+1. Remove the old Spectacular Spirit Journal icon from your Home Screen.
+2. Open the updated site in Safari.
+3. Tap Share.
+4. Tap **Add to Home Screen**.
+5. The preview should now show the wave / sunrise photograph.
 
-## Service-worker refresh
-This version uses cache name `ssj-v2`. The new service worker should retire the v1 cache. If the live site still shows the old interface:
-- refresh the page twice, or
-- fully close/reopen the browser, or
-- remove and re-add the home-screen app as a last resort.
-
-## iPhone icon refresh
-Apple can cache home-screen icons aggressively. If the signature-image icon does not update after deployment, remove the old home-screen shortcut and add it again from Safari.
-
-## YouTube chant
-The repository does not contain copied YouTube audio. The app embeds/streams the user-selected recording online and includes an offline speech-synthesis fallback. This avoids bundling the source recording into your GitHub repository.
+This removes only the Home Screen shortcut; it does not delete the website itself. Your app data is stored in browser storage for the same site URL, so keeping the same GitHub Pages URL preserves it unless Safari site data is separately cleared.

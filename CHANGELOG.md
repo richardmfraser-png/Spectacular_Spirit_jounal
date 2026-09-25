@@ -1,14 +1,15 @@
 # Changelog
 
-## v2 — 2026-09-25
-- Added optional multi-step onboarding Q&A
-- Added Skip setup and Help → Run setup wizard
-- Added guiding intention to profile and Today experience
-- Added Help & FAQ tab with Quick Start and common how-to answers
-- Embedded user-supplied Nam-myoho-renge-kyo YouTube recording in Meditation
-- Added offline voice fallback for chant
-- Refreshed signature wave image from latest supplied crop
-- Optimized supporting user photographs for faster web delivery
-- Regenerated install icons from signature image
-- Updated service-worker cache to `ssj-v2`
-- Preserved v1 local-storage key for continuity
+## v2.1 — image and install-icon reliability fix
+- Flattened all image and icon assets into the repository root.
+- Added photo-only wave/sunrise install icon.
+- Versioned manifest and icon filenames to bypass stale browser caches.
+- Updated service worker cache strategy and cache version.
+- Added `ASSET_CHECK.html` for deployment verification.
+- Added Help FAQ note for image/icon troubleshooting.
+
+## v2
+- Optional onboarding Q&A.
+- Help & FAQ tab.
+- Expanded photo integration.
+- Chant reference integration and fallback.

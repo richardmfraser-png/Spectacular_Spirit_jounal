@@ -1,4 +1,7 @@
-# Spectacular Spirit Journal — v2
+# Spectacular Spirit Journal — v2.1
+
+**This is the image/icon reliability release.** All photographs and install icons are root-level files for simple GitHub Pages deployment.
+
 
 A local-first, customizable web app for mental and physical wellness, journaling, spiritual practice, goals, meditation, selected readings and purposeful living.
 
@@ -31,3 +34,7 @@ No login or backend is required. Data is stored locally in the browser. Export J
 
 ## GitHub deployment
 See `GITHUB_UPDATE_GUIDE.md`.
+
+
+## v2.1 deployment verification
+After publishing, open `ASSET_CHECK.html`. If every tile appears, the image paths are correct. For an already-installed iPhone shortcut, remove the old shortcut and add it again so iOS captures the new photo icon.
