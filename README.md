@@ -1,60 +1,33 @@
-# Spectacular Spirit Journal — v1
+# Spectacular Spirit Journal — v2
 
-A local-first personal development web app built from the locked brief.
+A local-first, customizable web app for mental and physical wellness, journaling, spiritual practice, goals, meditation, selected readings and purposeful living.
 
-## Core concept
-Spectacular Spirit Journal is a structured but compassionate app for:
-- journaling and reflection
-- mental and physical wellness
-- meditation / chanting
-- goal-setting and milestones
-- selected readings and videos across multiple wisdom categories
-- tracking consistency without punitive streak culture
+## v2 additions
+- optional onboarding Q&A with **Skip and set up later**
+- onboarding can populate profile, guiding intention, goals, core commitments and preferences
+- dedicated **Help & FAQ** tab
+- in-app Quick Start content and links to deployment/support files
+- signature and supporting user photographs integrated across app sections
+- Nam-myoho-renge-kyo Chant module now integrates the user-supplied YouTube recording via embed
+- built-in speech-synthesis fallback for offline chant use
+- upgraded service-worker cache (`ssj-v2`)
+- existing browser data remains compatible because the local-storage key is unchanged
 
-The visual identity is built around your supplied photographs, especially the signature wave image:
-**rough, ragged, calm, serene, and full of light, water, and life.**
+## App structure
+- Today
+- Journal
+- Commitments
+- Goals & Milestones
+- Meditation
+- Readings & Wisdom
+- Progress
+- Help & FAQ
 
-## What is included
-- **Today** dashboard
-- **Journal** tab with morning intention, freeform journaling, evening reflection, state score, tags, and searchable history
-- **Commitments** tab with at least 2 mental and 2 physical commitments, optional sub-branches, customizable targets and cadence
-- **Goals** tab with target dates, linked commitments and milestones
-- **Meditation** tab with 3 loop options and a timer
-- **Readings & Wisdom** tab with 6 categories:
-  - Spiritual
-  - Motivational
-  - Leadership
-  - Wellness
-  - Reflection / Philosophy
-  - Purpose / Character
-- **Progress** tab with 7-day consistency, mental vs physical balance, goal progress and insight
-- PWA install assets and offline cache
+## Visual identity
+The attached close-up wave-and-light photograph remains the signature image: rough and ragged in the foreground; calm horizon; light breaking through. Supporting ocean, blossom, candlelight, forest-light and horizon imagery is used throughout the app.
 
-## Using it immediately
-Open **Spectacular_Spirit_Journal_Standalone.html** in a modern browser.
+## Privacy
+No login or backend is required. Data is stored locally in the browser. Export JSON backups regularly if the data matters.
 
-## Best phone experience
-Host this folder via HTTPS (GitHub Pages, Netlify, Cloudflare Pages or your own host), then:
-- **iPhone / iPad:** open in Safari → Share → Add to Home Screen
-- **Android:** open in Chrome → menu → Install app / Add to Home Screen
-
-The included icon is derived from the signature feature image.
-
-## Privacy model
-This build is **local-first**. No account or server is required. Data stays on the current browser/device unless you export it.
-
-## Key files
-- `index.html` — hosted app
-- `Spectacular_Spirit_Journal_Standalone.html` — easiest immediate preview
-- `manifest.webmanifest` — install metadata
-- `service-worker.js` — offline cache
-- `assets/images/` — your integrated photographs
-- `assets/icons/` — install icons
-
-## Next possible enhancements
-- integrate more of your full photo library into rotating headers
-- record or license a preferred chant audio file
-- cloud sync and sign-in
-- reminders / notifications
-- deeper analytics and monthly reviews
-- richer resource import / search
+## GitHub deployment
+See `GITHUB_UPDATE_GUIDE.md`.

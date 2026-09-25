@@ -1,7 +1,7 @@
 {
   "name": "Spectacular Spirit Journal",
   "short_name": "Spirit Journal",
-  "description": "A local-first app for journaling, meditation, commitments, goals, wellness and selected readings.",
+  "description": "A customizable journal for mental and physical wellness, spiritual practice, goals, meditation, readings and reflection.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#eef8fb",

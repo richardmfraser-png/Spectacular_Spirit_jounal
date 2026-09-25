@@ -1,78 +1,44 @@
-# Spectacular Spirit Journal — Quick Start
+# Spectacular Spirit Journal — Quick Start (v2)
 
-## 1) Open the app
-The fastest immediate preview is:
-- `Spectacular_Spirit_Journal_Standalone.html`
-
-## 2) Set your journey
-Go to **Journal** and set:
+## First launch: optional onboarding
+On first launch, the app offers a short setup Q&A. It can populate:
 - your name
 - journey name
-- duration
-- start date
+- duration and start date
+- guiding intention
+- up to three goals
+- four foundational commitments (2 mental + 2 physical)
+- default meditation mode
+- default Wisdom category
 
-## 3) Define commitments
-Use **Commitments** to manage your core structure.
-Keep at least:
-- **2 mental** commitments
-- **2 physical** commitments
+You can choose **Skip — set up later**. Nothing is locked. Use **Help → Run setup wizard** whenever you want to revisit it.
 
-Each commitment can define:
-- category (mental / physical)
-- measure (minutes, sessions, pages, steps, items, or done / not done)
-- target each time
-- times per week
-- optional note
-- optional sub-branches
+## Daily use
+1. **Today:** set My 3 and log commitment activity.
+2. **Journal:** capture morning intention, freeform writing, evening reflection, state/energy and tags.
+3. **Commitments:** edit the 2 mental + 2 physical foundation, add more commitments, or add sub-branches.
+4. **Goals:** define outcomes, target dates and milestones, and link goals to recurring commitments.
+5. **Meditation:** choose the Nam-myoho-renge-kyo chant, Ocean Breath or Soft Bell and run the timer.
+6. **Wisdom:** browse selected readings/videos or add your own resources.
+7. **Progress:** review consistency, mental/physical balance, goals and trends.
+8. **Help:** access this guide, FAQs, setup and deployment instructions.
 
-Example:
-- Exercise
-  - Pickleball — 60 minutes, 5x/week
-  - Strength training — 30 minutes, 4x/week
-  - Walking — 30 minutes, 5x/week
+## Chant playback
+The Chant module uses the user-supplied YouTube recording:
+https://youtu.be/SazK2dPvd4c?si=bx0zYpYNMCoovOUd
 
-## 4) Journal daily
-Use **Journal** for:
-- morning intention
-- freeform journaling
-- evening reflection
-- state / energy score
-- tags
-- searchable history
+The app **streams/embed the recording** rather than copying its audio into the repository. When the Chant module is selected, use:
+- **Reference recording (online)** for the embedded YouTube source, or
+- **Built-in offline voice fallback** if internet playback is unavailable.
 
-## 5) Set goals
-Use **Goals** to define:
-- the goal itself
-- why it matters
-- target date
-- linked commitments
-- milestones
+Some mobile browsers may require you to tap Play in the embedded YouTube player once before the app timer can control it.
 
-## 6) Meditate
-The **Meditation** tab includes three loop options:
-1. Chant Guide — device voice repeats “Nam-myoho-renge-kyo”
-2. Ocean Breath — generated surf-like ambient audio
-3. Soft Bell — generated drone + periodic bell
+## Data and backups
+This version is local-first. Data is stored in browser storage on the current device. Use **Progress → Backup data** before clearing browser data or changing devices.
 
-Choose 5, 10, 15, 20 or 30 minutes, then press Play.
+## Home-screen install
+After deploying over HTTPS:
+- iPhone/iPad: Safari → Share → Add to Home Screen
+- Android: Chrome → menu → Install app / Add to Home Screen
 
-## 7) Explore wisdom
-Use **Readings & Wisdom** for selected materials across six categories. Each reading includes a reflection prompt and suggested video links. You can also add your own resources.
-
-## 8) Review progress
-**Progress** shows:
-- overall weekly consistency
-- mental vs physical balance
-- meditation minutes
-- 7-day daily consistency
-- performance by commitment
-- goal progress
-- a simple pattern insight
-
-## 9) Export
-Use **Progress** to:
-- export CSV
-- back up full JSON data
-
-## Important limitation
-This build stores data in local browser storage on the current device/browser. Export a backup if you want to preserve or move data.
+The app icon is derived from the signature wave-and-light photograph.

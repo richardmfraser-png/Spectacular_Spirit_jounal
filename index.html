@@ -63,10 +63,62 @@ main{padding:16px}
 .modal{position:fixed;inset:0;z-index:100;background:rgba(4,25,39,.56);display:none;align-items:flex-end;justify-content:center}.modal.open{display:flex}.sheet{background:#f7fbfc;width:min(820px,100%);max-height:92vh;overflow:auto;border-radius:28px 28px 0 0;padding:20px 18px calc(28px + env(safe-area-inset-bottom));box-shadow:0 -20px 60px rgba(0,0,0,.2)}.sheet h2{margin:4px 0 4px}.close{float:right;border:0;background:#e7f1f4;width:34px;height:34px;border-radius:50%}
 .hidden{display:none!important}.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;background:#062a42;color:white;padding:10px 14px;border-radius:14px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:300}.toast.show{opacity:1}
 hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+
+.setup{position:fixed;inset:0;z-index:400;background:#071f33;color:white;display:none;overflow:auto}.setup.open{display:block}
+.setup-bg{position:fixed;inset:0;background:url('assets/images/feature.jpg') center 36%/cover no-repeat;filter:saturate(1.03)}.setup-scrim{position:fixed;inset:0;background:linear-gradient(180deg,rgba(6,25,42,.22),rgba(5,28,45,.82) 48%,rgba(5,28,45,.96))}
+.setup-inner{position:relative;z-index:2;max-width:680px;margin:0 auto;padding:calc(30px + env(safe-area-inset-top)) 18px 50px}.setup-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.setup-top button{color:white;border-color:rgba(255,255,255,.32)}
+.setup-title{font-size:38px;line-height:1.03;margin:18px 0 10px}.setup-copy{line-height:1.5;opacity:.9;max-width:600px}.setup-card{background:rgba(249,253,254,.97);color:var(--ink);border-radius:24px;padding:18px;margin-top:20px;box-shadow:0 18px 60px rgba(0,0,0,.22)}
+.setup-card h2{margin:0 0 8px}.setup-card .field input,.setup-card .field select,.setup-card .field textarea{background:white}.setup-actions{display:flex;gap:9px;margin-top:12px}.setup-actions>*{flex:1}
+.stepdots{display:flex;gap:7px;margin-top:16px}.stepdots i{height:8px;width:8px;border-radius:99px;background:rgba(255,255,255,.35)}.stepdots i.active{width:28px;background:white}
+.onboard-goal,.onboard-commit{border:1px solid var(--line);background:white;border-radius:16px;padding:12px;margin:10px 0}.onboard-commit .label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ocean);font-weight:800;margin-bottom:8px}
+.faq details{border-top:1px solid var(--line);padding:11px 0}.faq details:first-of-type{border-top:0}.faq summary{font-weight:800;cursor:pointer}.faq details div{font-size:13px;line-height:1.5;color:var(--muted);padding-top:8px}
+.help-links{display:grid;grid-template-columns:1fr 1fr;gap:10px}.help-link{display:block;text-decoration:none;border:1px solid var(--line);background:#f4fafc;border-radius:16px;padding:12px;color:var(--deep);font-weight:800}.help-link small{display:block;color:var(--muted);font-weight:400;margin-top:4px}
+.youtube-wrap{position:relative;padding-top:56.25%;border-radius:16px;overflow:hidden;background:#061c2c}.youtube-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.source-note{font-size:12px;line-height:1.45;color:var(--muted);margin-top:9px}
+
 @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr 1fr}.hero h1{font-size:30px}.row{flex-direction:column}.log-row{flex-direction:column;align-items:flex-start}.log-input{width:100%}.log-input input{flex:1;width:auto}.hero .meta{flex-direction:column;align-items:flex-start}.section-title h2{font-size:21px}}
 </style>
 </head>
 <body>
+
+<div id="setup" class="setup">
+  <div class="setup-bg"></div><div class="setup-scrim"></div>
+  <div class="setup-inner">
+    <div class="setup-top"><div class="brand">SPECTACULAR SPIRIT JOURNAL</div><button class="btn ghost small" onclick="skipSetup()">Skip — set up later</button></div>
+    <div class="setup-title">Begin with intention.</div>
+    <div class="setup-copy">A short, optional setup will personalize your journal, goals, commitments and meditation preferences. You can skip it and configure everything manually later.</div>
+    <div class="stepdots"><i id="sd1" class="active"></i><i id="sd2"></i><i id="sd3"></i><i id="sd4"></i></div>
+
+    <section id="setup1" class="setup-card">
+      <h2>1. Your journey</h2>
+      <div class="field"><label>Your name</label><input id="obName" placeholder="First name"></div>
+      <div class="field"><label>Journey name</label><input id="obJourney" value="Spectacular Spirit Journal"></div>
+      <div class="row"><div class="field"><label>Length (days)</label><select id="obDays"><option>30</option><option>60</option><option selected>75</option><option>90</option><option>120</option><option>180</option></select></div><div class="field"><label>Start date</label><input id="obStart" type="date"></div></div>
+      <div class="field"><label>Guiding intention</label><textarea id="obIntention" placeholder="What do I want this practice to help me become or experience?"></textarea></div>
+      <div class="setup-actions"><button class="btn primary" onclick="setupNext(2)">Next: goals →</button></div>
+    </section>
+
+    <section id="setup2" class="setup-card hidden">
+      <h2>2. Define a few goals</h2><div class="muted">Optional. Add up to three goals now, or leave them blank and use the Goals tab later.</div>
+      <div id="obGoals"></div>
+      <div class="setup-actions"><button class="btn ghost" onclick="setupNext(1)">← Back</button><button class="btn primary" onclick="setupNext(3)">Next: commitments →</button></div>
+    </section>
+
+    <section id="setup3" class="setup-card hidden">
+      <h2>3. Set the four foundations</h2><div class="muted">Start with two mental and two physical commitments. These remain fully editable later, with optional sub-branches.</div>
+      <div id="obCommitments"></div>
+      <div class="setup-actions"><button class="btn ghost" onclick="setupNext(2)">← Back</button><button class="btn primary" onclick="setupNext(4)">Next: preferences →</button></div>
+    </section>
+
+    <section id="setup4" class="setup-card hidden">
+      <h2>4. Preferences</h2>
+      <div class="field"><label>Default meditation</label><select id="obMeditation"><option value="chant">Nam-myoho-renge-kyo chant</option><option value="ocean">Ocean Breath</option><option value="bells">Soft Bell</option></select></div>
+      <div class="field"><label>Start Wisdom library in</label><select id="obWisdom"><option>Spiritual</option><option>Motivational</option><option>Leadership</option><option>Wellness</option><option>Reflection / Philosophy</option><option>Purpose / Character</option></select></div>
+      <div class="muted">Nothing here locks you in. The purpose is simply to make first use feel personal rather than empty.</div>
+      <div class="setup-actions"><button class="btn ghost" onclick="setupNext(3)">← Back</button><button class="btn primary" onclick="finishSetup()">Enter my journal</button></div>
+    </section>
+  </div>
+</div>
+
 <div class="shell">
   <header class="hero" id="hero">
     <div class="bg" id="heroBg"></div><div class="scrim"></div>
@@ -92,12 +144,14 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
     <button class="tabbtn" data-tab="meditation" onclick="showTab('meditation',this)">◌ Meditation</button>
     <button class="tabbtn" data-tab="wisdom" onclick="showTab('wisdom',this)">≡ Wisdom</button>
     <button class="tabbtn" data-tab="progress" onclick="showTab('progress',this)">▥ Progress</button>
+    <button class="tabbtn" data-tab="help" onclick="showTab('help',this)">? Help</button>
   </div>
 
   <main>
     <section id="tab-today" class="tab active">
       <div class="section-title"><h2>Today</h2><small id="dayCount"></small></div>
       <div class="grid2" id="todayStats"></div>
+      <div id="intentionCard"></div>
       <div class="card">
         <h3>My 3</h3><div class="muted">Three things that would make today feel intentional.</div>
         <div id="priorities"></div>
@@ -167,6 +221,15 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
         <div class="timer-options" id="timerOptions"></div>
         <div class="row" style="margin-top:14px"><button id="playBtn" class="btn" style="background:white;color:#082B45" onclick="toggleMeditation()">▶ Play</button><button class="btn" style="background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.2)" onclick="resetMeditation()">Reset</button></div>
       </div>
+
+      <div id="chantSourceCard" class="card hidden">
+        <div class="source">NAM-MYOHO-RENGE-KYO • REFERENCE RECORDING</div>
+        <h3>Chant recording</h3>
+        <div class="youtube-wrap"><iframe id="chantFrame" src="https://www.youtube-nocookie.com/embed/SazK2dPvd4c?enablejsapi=1&playsinline=1&rel=0&loop=1&playlist=SazK2dPvd4c" title="Nam-myoho-renge-kyo chant" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="field" style="margin-top:12px"><label>Chant playback</label><select id="chantPlayback" onchange="state.profile.chantPlayback=this.value;save()"><option value="youtube">Reference recording above (online)</option><option value="voice">Built-in offline voice fallback</option></select></div>
+        <div class="source-note">The app streams the user-selected YouTube recording rather than copying its audio into the package. The timer will attempt to start/pause the embedded player; if a browser blocks automatic playback, tap Play on the video once. The offline fallback uses device speech synthesis and is intentionally only an approximation.</div>
+        <a class="btn ghost small" href="https://youtu.be/SazK2dPvd4c?si=bx0zYpYNMCoovOUd" target="_blank" rel="noopener">Open source recording ↗</a>
+      </div>
       <div id="moduleList"></div>
       <div class="card"><h3>Session history</h3><div id="medHistory" class="muted">No sessions yet.</div></div>
     </section>
@@ -179,7 +242,7 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
       </div>
       <div id="wisdomFilters" class="filter-row"></div>
       <div class="card">
-        <div class="row"><button class="btn secondary" onclick="openResource()">＋ Add my own resource</button><button class="btn ghost" onclick="openSearchForCurrent()">Search this category</button></div>
+        <div class="row"><button class="btn secondary" onclick="openResource()">＋ Add my own resource</button><button class="btn ghost" onclick="openSearchForCurrent()">Search web</button><button class="btn ghost" onclick="openVideoSearchForCurrent()">Search YouTube</button></div>
       </div>
       <div id="wisdomList"></div>
       <div class="card">
@@ -196,6 +259,49 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
       <div class="card"><h3>What the pattern says</h3><div id="insight" class="insight"></div></div>
       <div class="row"><button class="btn secondary" onclick="exportCSV()">Export CSV</button><button class="btn secondary" onclick="exportJSON()">Backup data</button></div>
     </section>
+
+    <section id="tab-help" class="tab">
+      <div class="section-title"><h2>Help & FAQ</h2><small>quick start and common questions</small></div>
+      <div class="subtle-hero">
+        <div class="bg" style="background-image:url('assets/images/feature.jpg');background-position:center 38%"></div><div class="scrim"></div>
+        <div class="copy"><div class="badge">Start simple</div><h3 style="margin:8px 0 6px">You do not have to configure everything at once.</h3><div style="font-size:13px;line-height:1.45;max-width:560px">Begin with four commitments, one or two meaningful goals, a few minutes of reflection, and adjust the system as your practice becomes clearer.</div></div>
+      </div>
+      <div class="card">
+        <h3>Quick start</h3>
+        <ol class="muted" style="padding-left:20px;line-height:1.7">
+          <li>Run the optional setup wizard, or skip it.</li>
+          <li>Use <b>Today</b> for My 3 and activity logging.</li>
+          <li>Use <b>Journal</b> for intention, free writing and evening reflection.</li>
+          <li>Keep at least two mental and two physical <b>Commitments</b>.</li>
+          <li>Create discrete <b>Goals</b> with dates and milestones.</li>
+          <li>Use <b>Meditation</b> for chant, ocean breath or soft bell.</li>
+          <li>Use <b>Wisdom</b> to read, watch and save useful resources.</li>
+          <li>Review <b>Progress</b> weekly, then adjust rather than judge.</li>
+        </ol>
+        <div class="row"><button class="btn primary" onclick="openSetup()">Run setup wizard</button><button class="btn secondary" onclick="showTab('today',document.querySelector('[data-tab=&quot;today&quot;]'))">Go to Today</button></div>
+      </div>
+      <div class="card faq">
+        <h3>Frequently asked questions</h3>
+        <details open><summary>Where is my information stored?</summary><div>This version is local-first. Your journal, goals, commitments and logs are stored in this browser on this device. There is no account or cloud database in this build.</div></details>
+        <details><summary>How do I protect or move my data?</summary><div>Go to Progress and use <b>Backup data</b> to export a full JSON backup. CSV export provides a simpler activity record. Keep backups somewhere safe before clearing browser data or changing devices.</div></details>
+        <details><summary>What is the 2 mental + 2 physical rule?</summary><div>It is the baseline structure: at least two commitments for the mind / inner life and two for the body / physical life. You can rename them, change metrics, add more, and add sub-branches underneath them.</div></details>
+        <details><summary>What are sub-branches?</summary><div>Sub-branches let a broad commitment have separate trackable components. For example, Exercise can contain Pickleball 5×/week, Strength 4×/week and Walking 5×/week, each with its own target.</div></details>
+        <details><summary>How do Goals differ from Commitments?</summary><div>A goal is a defined outcome with a target date and milestones. A commitment is a recurring practice. You can link commitments to goals so the daily practice supports a larger destination.</div></details>
+        <details><summary>How does the chant work?</summary><div>The Chant module can stream the supplied YouTube recording when online. The app does not copy that recording into the package. If the embedded player is unavailable or you are offline, select the built-in voice fallback.</div></details>
+        <details><summary>Why might audio stop when my phone locks?</summary><div>Mobile browsers often suspend web-page audio in the background. For uninterrupted locked-screen playback, a later native-app wrapper or licensed audio implementation would be more reliable.</div></details>
+        <details><summary>How do I add my own readings or videos?</summary><div>Open Wisdom, select a category, then choose <b>Add my own resource</b>. Paste a title, URL and short note. It remains stored on this device with the rest of your app data.</div></details>
+        <details><summary>How do I install the app on my home screen?</summary><div>After hosting the repository over HTTPS: on iPhone/iPad use Safari → Share → Add to Home Screen. On Android use Chrome → menu → Install app / Add to Home Screen.</div></details>
+        <details><summary>How do I change setup later?</summary><div>Use Journal for journey settings, Commitments and Goals for their details, or come back here and choose <b>Run setup wizard</b>.</div></details>
+      </div>
+      <div class="card">
+        <h3>Instruction files</h3><div class="help-links">
+          <a class="help-link" href="QUICK_START.md" target="_blank">Quick Start<small>Short operating guide</small></a>
+          <a class="help-link" href="README.md" target="_blank">README<small>Features and implementation notes</small></a>
+          <a class="help-link" href="GITHUB_UPDATE_GUIDE.md" target="_blank">GitHub Update Guide<small>How to deploy this version</small></a>
+          <a class="help-link" href="LOCKED_BRIEF.md" target="_blank">Locked Brief<small>Design and product intent</small></a>
+        </div>
+      </div>
+    </section>
   </main>
 </div>
 
@@ -209,7 +315,7 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
 
 <script>
 const KEY='spectacularSpiritJournalV1';
-const heroMap={today:{img:'assets/images/feature.jpg',title:'Rough. Ragged. Calm. Serene. Full of light.',text:'A structured but compassionate app for spiritual growth, journaling, mental and physical wellness, and purposeful living.',quote:'The surface can be turbulent while the horizon remains calm.'},journal:{img:'assets/images/goldsea.jpg',title:'Spectacular Spirit Journal',text:'Journaling sits at the centre of this build: intention, reflection, honest writing, and a history you can learn from.',quote:'Write close to the truth. Read back with mercy.'},commitments:{img:'assets/images/wavewide.jpg',title:'Commit to the practices that shape you',text:'Define mental and physical commitments, then break them into sub-branches when the detail matters.',quote:'Consistency is architecture. One action at a time.'},goals:{img:'assets/images/blossoms.jpg',title:'Goals with meaning, not pressure',text:'Describe the destination, why it matters, and the milestones that make it real.',quote:'Purpose becomes visible when it is named.'},meditation:{img:'assets/images/candles.jpg',title:'Stillness has its own strength',text:'Three simple audio experiences: chant, ocean breath, and soft bell. Press play, breathe, and return.',quote:'The return is the practice.'},wisdom:{img:'assets/images/forestlight.jpg',title:'Selected readings & videos',text:'A pluralistic library organized around spirit, motivation, leadership, wellness, reflection, and character.',quote:'Read widely. Keep what serves.'},progress:{img:'assets/images/horizon.jpg',title:'See the pattern, then adjust',text:'Track consistency, balance, and the small signals that show where your practice is helping or slipping.',quote:'Awareness → adjustment → consistency.'}};
+const heroMap={today:{img:'assets/images/feature.jpg',title:'Rough. Ragged. Calm. Serene. Full of light.',text:'A structured but compassionate app for spiritual growth, journaling, mental and physical wellness, and purposeful living.',quote:'The surface can be turbulent while the horizon remains calm.'},journal:{img:'assets/images/goldsea.jpg',title:'Spectacular Spirit Journal',text:'Journaling sits at the centre of this build: intention, reflection, honest writing, and a history you can learn from.',quote:'Write close to the truth. Read back with mercy.'},commitments:{img:'assets/images/wavewide.jpg',title:'Commit to the practices that shape you',text:'Define mental and physical commitments, then break them into sub-branches when the detail matters.',quote:'Consistency is architecture. One action at a time.'},goals:{img:'assets/images/blossoms.jpg',title:'Goals with meaning, not pressure',text:'Describe the destination, why it matters, and the milestones that make it real.',quote:'Purpose becomes visible when it is named.'},meditation:{img:'assets/images/candles.jpg',title:'Stillness has its own strength',text:'Three simple audio experiences: chant, ocean breath, and soft bell. Press play, breathe, and return.',quote:'The return is the practice.'},wisdom:{img:'assets/images/forestlight.jpg',title:'Selected readings & videos',text:'A pluralistic library organized around spirit, motivation, leadership, wellness, reflection, and character.',quote:'Read widely. Keep what serves.'},progress:{img:'assets/images/horizon.jpg',title:'See the pattern, then adjust',text:'Track consistency, balance, and the small signals that show where your practice is helping or slipping.',quote:'Awareness → adjustment → consistency.'},help:{img:'assets/images/feature.jpg',title:'Help when you need it',text:'Quick start instructions, common questions, setup guidance and deployment notes live here.',quote:'Structure should make the practice easier, not heavier.'}};
 const wisdomCategories=['Spiritual','Motivational','Leadership','Wellness','Reflection / Philosophy','Purpose / Character'];
 const wisdomLibrary={
  'Spiritual':[
@@ -239,7 +345,7 @@ const wisdomLibrary={
   {title:'Choose the Person, Not Only the Outcome',source:'Character • original summary',body:'Outcomes matter, but the kind of person one becomes while pursuing them matters too. Ambition without character usually corrodes. Character without action can remain merely aspirational. The work is to grow both together.',prompt:'What kind of person am I practicing being?',videos:[['Character development and excellence','https://www.youtube.com/results?search_query=character+development+excellence']]}]
 };
 const modules=[
- {id:'chant',title:'Chant Guide',icon:'◉',desc:'A steady spoken loop of “Nam-myoho-renge-kyo” using your device voice.'},
+ {id:'chant',title:'Nam-myoho-renge-kyo Chant',icon:'◉',desc:'Streams the supplied reference recording when online, with an offline device-voice fallback.'},
  {id:'ocean',title:'Ocean Breath',icon:'≈',desc:'A generated wash of filtered sound that rises and falls like breathing surf.'},
  {id:'bells',title:'Soft Bell',icon:'○',desc:'A quiet harmonic drone with a gentle bell at intervals.'}
 ];
@@ -254,15 +360,31 @@ function uid(){return Math.random().toString(36).slice(2,9)}
 function isoDate(d=new Date()){let x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)}
 function mondayOf(d=new Date()){let x=new Date(d);x.setHours(0,0,0,0);let day=(x.getDay()+6)%7;x.setDate(x.getDate()-day);return x}
 function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function load(){try{state=JSON.parse(localStorage.getItem(KEY))}catch(e){}; if(!state){state={profile:null,commitments:[],logs:[],priorities:{},journal:{},meditations:[],goals:[],readingActivity:[],customResources:[]}}; state.logs ||= []; state.priorities ||= {}; state.journal ||= {}; state.meditations ||= []; state.goals ||= []; state.readingActivity ||= []; state.customResources ||= []; state.commitments ||= []}
+function load(){try{state=JSON.parse(localStorage.getItem(KEY))}catch(e){}; if(!state){state={profile:null,commitments:[],logs:[],priorities:{},journal:{},meditations:[],goals:[],readingActivity:[],customResources:[]}}; state.logs ||= []; state.priorities ||= {}; state.journal ||= {}; state.meditations ||= []; state.goals ||= []; state.readingActivity ||= []; state.customResources ||= []; state.commitments ||= []; state.profile ||= {name:'',journeyName:'Spectacular Spirit Journal',durationDays:75,startDate:isoDate(),createdAt:new Date().toISOString()}; state.profile.guidingIntention ||= ''; state.profile.chantPlayback ||= 'youtube'; state.profile.defaultMeditation ||= 'chant'; state.profile.defaultWisdom ||= 'Spiritual'}
 function save(){localStorage.setItem(KEY,JSON.stringify(state))}
 function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1900)}
-function init(){load(); if(!state.profile){state.profile={name:'',journeyName:'Spectacular Spirit Journal',durationDays:75,startDate:isoDate(),createdAt:new Date().toISOString()}; state.commitments=JSON.parse(JSON.stringify(defaultCommitments)); save()} renderAll(); registerSW()}
+function init(){load(); if(!state.commitments.length){state.commitments=JSON.parse(JSON.stringify(defaultCommitments)); state.commitments.forEach(c=>c.id=uid()); save()} selectedModule=state.profile.defaultMeditation||'chant'; wisdomCategory=state.profile.defaultWisdom||'Spiritual'; renderAll(); registerSW(); if(!state.profile.onboardingStatus) setTimeout(()=>openSetup(),120)}
 function registerSW(){if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('service-worker.js').catch(()=>{})}
-function renderAll(){let now=new Date();dateBadge.textContent=now.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}); profileName.value=state.profile.name||''; journeyName.value=state.profile.journeyName||'Spectacular Spirit Journal'; journeyDays.value=state.profile.durationDays||75; journeyStart.value=state.profile.startDate||isoDate(); renderDayBadge(); renderPriorities(); renderToday(); renderCommitments(); renderGoals(); renderMeditation(); renderWisdom(); renderJournal(); renderProgress(); updateHero()}
+function renderAll(){let now=new Date();dateBadge.textContent=now.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}); profileName.value=state.profile.name||''; journeyName.value=state.profile.journeyName||'Spectacular Spirit Journal'; journeyDays.value=state.profile.durationDays||75; journeyStart.value=state.profile.startDate||isoDate(); renderDayBadge(); renderPriorities(); renderToday(); renderIntention(); renderCommitments(); renderGoals(); renderMeditation(); renderWisdom(); renderJournal(); renderProgress(); updateHero()}
 function renderDayBadge(){let start=new Date((state.profile.startDate||isoDate())+'T00:00:00'); let day=Math.max(1,Math.floor((new Date().setHours(0,0,0,0)-start)/86400000)+1); dayBadge.textContent=`Day ${day} of ${state.profile.durationDays||75}`; dayCount.textContent=`Day ${day} of ${state.profile.durationDays||75}`}
 function showTab(name,btn){currentTab=name; document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active')); document.getElementById('tab-'+name).classList.add('active'); document.querySelectorAll('.tabbtn').forEach(x=>x.classList.remove('active')); if(btn)btn.classList.add('active'); updateHero(); if(name==='progress') renderProgress(); if(name==='journal') renderJournal(); if(name==='wisdom') renderWisdom(); window.scrollTo({top:0,behavior:'smooth'})}
-function updateHero(){let h=heroMap[currentTab]||heroMap.today; heroBg.style.backgroundImage=`url('${h.img}')`; heroTitle.textContent=h.title; heroText.textContent=h.text; heroQuote.textContent=h.quote}
+function updateHero(){let h=heroMap[currentTab]||heroMap.today; heroBg.style.backgroundImage=`url('${h.img}')`; heroTitle.textContent=h.title; heroText.textContent=(currentTab==='today'&&state.profile.guidingIntention)?state.profile.guidingIntention:h.text; heroQuote.textContent=h.quote}
+
+function openSetup(){
+  obName.value=state.profile.name||''; obJourney.value=state.profile.journeyName||'Spectacular Spirit Journal'; obDays.value=String(state.profile.durationDays||75); obStart.value=state.profile.startDate||isoDate(); obIntention.value=state.profile.guidingIntention||''; obMeditation.value=state.profile.defaultMeditation||'chant'; obWisdom.value=state.profile.defaultWisdom||'Spiritual';
+  renderSetupGoals(); renderSetupCommitments(); setupNext(1); setup.classList.add('open');
+}
+function skipSetup(){state.profile.onboardingStatus='skipped'; save(); setup.classList.remove('open'); toast('Setup skipped — you can run it anytime from Help')}
+function setupNext(n){for(let i=1;i<=4;i++){document.getElementById('setup'+i).classList.toggle('hidden',i!==n); document.getElementById('sd'+i).classList.toggle('active',i===n)}}
+function renderSetupGoals(){let goals=[...state.goals].slice(0,3); while(goals.length<3)goals.push({title:'',targetDate:'',why:''}); obGoals.innerHTML=goals.map((g,i)=>`<div class="onboard-goal"><div class="field"><label>Goal ${i+1}</label><input id="obGoal${i}" value="${esc(g.title||'')}" placeholder="Optional goal"></div><div class="row"><div class="field"><label>Target date</label><input id="obGoalDate${i}" type="date" value="${esc(g.targetDate||'')}"></div><div class="field"><label>Why it matters</label><input id="obGoalWhy${i}" value="${esc(g.why||'')}" placeholder="Short reason"></div></div></div>`).join('')}
+function renderSetupCommitments(){let mental=state.commitments.filter(c=>c.category==='mental').slice(0,2), physical=state.commitments.filter(c=>c.category==='physical').slice(0,2); let fallbackMental=defaultCommitments.filter(c=>c.category==='mental'), fallbackPhysical=defaultCommitments.filter(c=>c.category==='physical'); while(mental.length<2){let d=fallbackMental[mental.length]||{name:'Mental practice',category:'mental',metric:'minutes',target:10,frequency:7,note:'',branches:[]}; mental.push({...d,id:uid()})} while(physical.length<2){let d=fallbackPhysical[physical.length]||{name:'Physical practice',category:'physical',metric:'minutes',target:30,frequency:5,note:'',branches:[]}; physical.push({...d,id:uid()})} let cs=[...mental,...physical]; obCommitments.innerHTML=cs.map((c,i)=>`<div class="onboard-commit"><div class="label">${i<2?'Mental':'Physical'} foundation</div><div class="field"><label>Name</label><input id="obCName${i}" value="${esc(c.name||'')}"></div><div class="row"><div class="field"><label>Measure</label><select id="obCMetric${i}">${['minutes','sessions','pages','steps','items','check'].map(m=>`<option${(c.metric||'minutes')===m?' selected':''}>${m}</option>`).join('')}</select></div><div class="field"><label>Target</label><input id="obCTarget${i}" type="number" min="1" value="${c.target||20}"></div><div class="field"><label>Times/week</label><input id="obCFreq${i}" type="number" min="1" max="7" value="${c.frequency||7}"></div></div></div>`).join('')}
+function finishSetup(){
+  state.profile.name=obName.value.trim(); state.profile.journeyName=obJourney.value.trim()||'Spectacular Spirit Journal'; state.profile.durationDays=Math.max(7,+obDays.value||75); state.profile.startDate=obStart.value||isoDate(); state.profile.guidingIntention=obIntention.value.trim(); state.profile.defaultMeditation=obMeditation.value; state.profile.defaultWisdom=obWisdom.value; state.profile.onboardingStatus='completed'; state.profile.onboardingCompletedAt=new Date().toISOString();
+  let newGoals=[]; for(let i=0;i<3;i++){let title=document.getElementById('obGoal'+i).value.trim(); if(title)newGoals.push({id:(state.goals[i]?.id)||uid(),title,why:document.getElementById('obGoalWhy'+i).value.trim(),targetDate:document.getElementById('obGoalDate'+i).value,linkedCommitmentIds:state.goals[i]?.linkedCommitmentIds||[],milestones:state.goals[i]?.milestones||[]})} if(newGoals.length){state.goals=[...newGoals,...state.goals.slice(3)]}
+  let existing=[...state.commitments]; let baseMental=existing.filter(c=>c.category==='mental').slice(0,2), basePhysical=existing.filter(c=>c.category==='physical').slice(0,2); let fbMental=defaultCommitments.filter(c=>c.category==='mental'), fbPhysical=defaultCommitments.filter(c=>c.category==='physical'); while(baseMental.length<2){let d=fbMental[baseMental.length]||{name:'Mental practice',category:'mental',metric:'minutes',target:10,frequency:7,note:'',branches:[]}; baseMental.push({...d,id:uid()})} while(basePhysical.length<2){let d=fbPhysical[basePhysical.length]||{name:'Physical practice',category:'physical',metric:'minutes',target:30,frequency:5,note:'',branches:[]}; basePhysical.push({...d,id:uid()})} let base=[...baseMental,...basePhysical]; let next=[]; for(let i=0;i<4;i++){let old=base[i]; let fallback=i<2?defaultCommitments.filter(c=>c.category==='mental')[i]:defaultCommitments.filter(c=>c.category==='physical')[i-2]; next.push({...old,id:old.id||uid(),name:document.getElementById('obCName'+i).value.trim()||fallback.name,category:i<2?'mental':'physical',metric:document.getElementById('obCMetric'+i).value,target:+document.getElementById('obCTarget'+i).value||1,frequency:Math.min(7,Math.max(1,+document.getElementById('obCFreq'+i).value||1)),branches:old.branches||[]})} let used=new Set(base.map(c=>c.id)); state.commitments=[...next,...existing.filter(c=>!used.has(c.id))]; selectedModule=state.profile.defaultMeditation; wisdomCategory=state.profile.defaultWisdom; save(); setup.classList.remove('open'); renderAll(); toast('Your journal is ready')
+}
+function renderIntention(){let v=(state.profile.guidingIntention||'').trim(); intentionCard.innerHTML=v?`<div class="card"><div class="source">GUIDING INTENTION</div><div style="font-family:Georgia,serif;font-size:18px;line-height:1.5">${esc(v)}</div></div>`:''}
+
 function priorityData(){let d=isoDate(); state.priorities[d] ||= [{text:'',done:false},{text:'',done:false},{text:'',done:false}]; return state.priorities[d]}
 function renderPriorities(){let p=priorityData(); priorities.innerHTML=p.map((x,i)=>`<div class="priority"><button class="check ${x.done?'done':''}" onclick="togglePriority(${i})">${x.done?'✓':''}</button><input type="text" value="${esc(x.text)}" placeholder="Priority ${i+1}" oninput="updatePriority(${i},this.value)"></div>`).join('')}
 function updatePriority(i,v){priorityData()[i].text=v; save()}
@@ -302,7 +424,7 @@ function renderJournalHistory(){let q=(journalSearch.value||'').trim().toLowerCa
 function shorten(s,n){return s.length>n?s.slice(0,n-1)+'…':s}
 function saveJourneySettings(){state.profile.name=profileName.value.trim(); state.profile.journeyName=journeyName.value.trim()||'Spectacular Spirit Journal'; state.profile.durationDays=Math.max(7,+journeyDays.value||75); state.profile.startDate=journeyStart.value||isoDate(); save(); renderAll(); toast('Settings saved')}
 
-function renderMeditation(){moduleList.innerHTML=modules.map(m=>`<div class="card module ${selectedModule===m.id?'selected':''}" onclick="selectModule('${m.id}')"><div class="source">${m.icon} ${m.title}</div><div class="muted">${m.desc}</div></div>`).join(''); timerOptions.innerHTML=[5,10,15,20,30].map(n=>`<button class="${n===timerMinutes?'active':''}" onclick="setTimer(${n});event.stopPropagation()">${n} min</button>`).join(''); updateTimerUI(); let last=[...state.meditations].reverse().slice(0,6); medHistory.innerHTML=last.length?last.map(x=>`<div class="log-row"><div><b>${modules.find(m=>m.id===x.module)?.title||x.module}</b><small>${x.date}</small></div><b>${x.minutes} min</b></div>`).join(''):'No sessions yet.'}
+function renderMeditation(){chantSourceCard.classList.toggle('hidden',selectedModule!=='chant'); chantPlayback.value=state.profile.chantPlayback||'youtube'; moduleList.innerHTML=modules.map(m=>`<div class="card module ${selectedModule===m.id?'selected':''}" onclick="selectModule('${m.id}')"><div class="source">${m.icon} ${m.title}</div><div class="muted">${m.desc}</div></div>`).join(''); timerOptions.innerHTML=[5,10,15,20,30].map(n=>`<button class="${n===timerMinutes?'active':''}" onclick="setTimer(${n});event.stopPropagation()">${n} min</button>`).join(''); updateTimerUI(); let last=[...state.meditations].reverse().slice(0,6); medHistory.innerHTML=last.length?last.map(x=>`<div class="log-row"><div><b>${modules.find(m=>m.id===x.module)?.title||x.module}</b><small>${x.date}</small></div><b>${x.minutes} min</b></div>`).join(''):'No sessions yet.'}
 function selectModule(id){if(timerRunning){toast('Stop the current session before changing sound.'); return} selectedModule=id; renderMeditation()}
 function setTimer(n){if(timerRunning)return; timerMinutes=n; timerRemaining=n*60; renderMeditation()}
 function updateTimerUI(){let mm=Math.floor(timerRemaining/60), ss=timerRemaining%60; timerText.textContent=`${mm}:${String(ss).padStart(2,'0')}`; let pct=(1-timerRemaining/(timerMinutes*60))*100; timerRing.style.setProperty('--timerPct',`${Math.max(0,Math.min(100,pct))}%`); timerState.textContent=timerRunning?(modules.find(m=>m.id===selectedModule)?.title||'playing'):'ready'; playBtn.textContent=timerRunning?'Ⅱ Pause':'▶ Play'}
@@ -313,8 +435,9 @@ function resetMeditation(){pauseMeditation(); timerRemaining=timerMinutes*60; up
 function completeMeditation(){clearInterval(timerInterval); timerInterval=null; timerRunning=false; stopSound(); state.meditations.push({date:isoDate(),module:selectedModule,minutes:timerMinutes,completedAt:new Date().toISOString()}); let c=state.commitments.find(x=>x.category==='mental'&&x.metric==='minutes'&&/(meditat|still|chant|mind)/i.test(x.name)); if(c) state.logs.push({date:isoDate(),commitmentId:c.id,branchId:null,value:timerMinutes,createdAt:new Date().toISOString(),source:'meditation'}); save(); timerRemaining=0; renderMeditation(); renderToday(); renderProgress(); toast('Session complete')}
 function ensureAudio(){if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)(); if(audioCtx.state==='suspended')audioCtx.resume()}
 function startSound(id){stopSound(); if(id==='chant')startChant(); else if(id==='ocean')startOcean(); else startBells()}
-function stopSound(){speechActive=false; if('speechSynthesis' in window) speechSynthesis.cancel(); if(bellInterval){clearInterval(bellInterval); bellInterval=null} audioNodes.forEach(n=>{try{n.stop?.()}catch(e){} try{n.disconnect?.()}catch(e){}}); audioNodes=[]}
-function startChant(){speechActive=true; const speak=()=>{if(!speechActive||!timerRunning)return; let u=new SpeechSynthesisUtterance('Nam myoho renge kyo'); u.rate=.82; u.pitch=.82; u.volume=.75; u.onend=()=>setTimeout(speak,180); speechSynthesis.speak(u)}; speak()}
+function stopSound(){speechActive=false; if('speechSynthesis' in window) speechSynthesis.cancel(); youtubeCommand('pauseVideo'); if(bellInterval){clearInterval(bellInterval); bellInterval=null} audioNodes.forEach(n=>{try{n.stop?.()}catch(e){} try{n.disconnect?.()}catch(e){}}); audioNodes=[]}
+function youtubeCommand(func){try{chantFrame?.contentWindow?.postMessage(JSON.stringify({event:'command',func,args:[]}), '*')}catch(e){}}
+function startChant(){if((state.profile.chantPlayback||'youtube')==='youtube'){youtubeCommand('playVideo');return} speechActive=true; const speak=()=>{if(!speechActive||!timerRunning)return; let u=new SpeechSynthesisUtterance('Nam myoho renge kyo'); u.rate=.78; u.pitch=.78; u.volume=.78; u.onend=()=>setTimeout(speak,120); speechSynthesis.speak(u)}; speak()}
 function makeNoise(seconds=4){ensureAudio(); let len=audioCtx.sampleRate*seconds,b=audioCtx.createBuffer(1,len,audioCtx.sampleRate),d=b.getChannelData(0); for(let i=0;i<len;i++) d[i]=Math.random()*2-1; let s=audioCtx.createBufferSource(); s.buffer=b; s.loop=true; return s}
 function startOcean(){ensureAudio(); let src=makeNoise(),filter=audioCtx.createBiquadFilter(),gain=audioCtx.createGain(),lfo=audioCtx.createOscillator(),lfg=audioCtx.createGain(); filter.type='lowpass'; filter.frequency.value=620; gain.gain.value=.06; lfo.frequency.value=.09; lfg.gain.value=.045; lfo.connect(lfg); lfg.connect(gain.gain); src.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination); src.start(); lfo.start(); audioNodes=[src,filter,gain,lfo,lfg]}
 function bellHit(){ensureAudio(); let o=audioCtx.createOscillator(),g=audioCtx.createGain(); o.type='sine'; o.frequency.value=528; g.gain.setValueAtTime(.0001,audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(.14,audioCtx.currentTime+.03); g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+3.2); o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime+3.3)}
@@ -327,9 +450,10 @@ function carryPrompt(p){let prompt=decodeURIComponent(p); let d=isoDate(); state
 function openResource(){rCategory.innerHTML=wisdomCategories.map(c=>`<option${c===wisdomCategory?' selected':''}>${c}</option>`).join(''); rCategory.value=wisdomCategory; rType.value='reading'; rTitle.value=''; rUrl.value=''; rNote.value=''; resourceModal.classList.add('open')}
 function closeResource(){resourceModal.classList.remove('open')}
 function saveResource(){let item={id:uid(),category:rCategory.value,type:rType.value,title:rTitle.value.trim()||'Untitled',url:rUrl.value.trim(),note:rNote.value.trim(),createdAt:new Date().toISOString()}; state.customResources.push(item); save(); closeResource(); renderCustomResources(); toast('Resource saved')}
-function renderCustomResources(){let list=state.customResources.filter(x=>x.category===wisdomCategory); resourceList.innerHTML=state.customResources.length?state.customResources.map(r=>`<div class="log-row"><div><b>${esc(r.title)}</b><small>${esc(r.category)} • ${esc(r.type)}${r.note?` • ${esc(r.note)}`:''}</small></div><div><a class="btn secondary small" href="${esc(r.url)}" target="_blank" rel="noopener">Open</a> <button class="btn danger small" onclick="deleteResource('${r.id}')">Delete</button></div></div>`).join(''):'No custom resources yet.'}
+function renderCustomResources(){let list=state.customResources.filter(x=>x.category===wisdomCategory); resourceList.innerHTML=list.length?list.map(r=>`<div class="log-row"><div><b>${esc(r.title)}</b><small>${esc(r.category)} • ${esc(r.type)}${r.note?` • ${esc(r.note)}`:''}</small></div><div><a class="btn secondary small" href="${esc(r.url)}" target="_blank" rel="noopener">Open</a> <button class="btn danger small" onclick="deleteResource('${r.id}')">Delete</button></div></div>`).join(''):'No custom resources saved in this category yet.'}
 function deleteResource(id){state.customResources=state.customResources.filter(x=>x.id!==id); save(); renderCustomResources()}
-function openSearchForCurrent(){let q=encodeURIComponent(wisdomCategory+' readings videos'); window.open('https://www.youtube.com/results?search_query='+q,'_blank')}
+function openSearchForCurrent(){let q=encodeURIComponent(wisdomCategory+' free readings philosophy wellness leadership'); window.open('https://www.google.com/search?q='+q,'_blank')}
+function openVideoSearchForCurrent(){let q=encodeURIComponent(wisdomCategory+' talks readings'); window.open('https://www.youtube.com/results?search_query='+q,'_blank')}
 
 function dayCompletion(date){if(!state.commitments.length)return 0; let total=0; state.commitments.forEach(c=>{let items=c.branches?.length?c.branches:[null]; let cr=0; items.forEach(b=>{let it=targetItem(c,b),v=state.logs.filter(l=>l.date===date&&l.commitmentId===c.id&&(l.branchId||null)===(b?.id||null)).reduce((a,l)=>a+(+l.value||0),0); cr += Math.min(1, v/it.target)}); total += cr/items.length}); return total/state.commitments.length}
 function renderProgress(){let mental=state.commitments.filter(c=>c.category==='mental'), physical=state.commitments.filter(c=>c.category==='physical'); let avg=a=>a.length?a.reduce((s,c)=>s+commitRatio(c),0)/a.length:0; let m=Math.round(avg(mental)*100), p=Math.round(avg(physical)*100), overall=Math.round(avg(state.commitments)*100); let wk=state.meditations.filter(x=>new Date(x.date+'T00:00:00')>=mondayOf()).reduce((a,x)=>a+x.minutes,0); let jCount=Object.keys(state.journal).length; progressStats.innerHTML=`<div class="stat"><b>${overall}%</b><span>overall consistency</span></div><div class="stat"><b>${wk}</b><span>meditation min this week</span></div><div class="stat"><b>${m}%</b><span>mental commitments</span></div><div class="stat"><b>${p}%</b><span>physical commitments</span></div><div class="stat"><b>${state.goals.length}</b><span>active goals</span></div><div class="stat"><b>${jCount}</b><span>journal entries</span></div>`; let days=[]; for(let i=6;i>=0;i--){let d=new Date(); d.setDate(d.getDate()-i); days.push(d)} dayBars.innerHTML=days.map(d=>{let ds=isoDate(d), pct=Math.round(dayCompletion(ds)*100); return `<div class="barwrap"><div class="bar"><i style="height:${Math.max(3,pct)}%"></i></div><small>${d.toLocaleDateString(undefined,{weekday:'narrow'})}<br>${pct}%</small></div>`}).join(''); commitBars.innerHTML=state.commitments.map(c=>`<div style="margin:12px 0"><div style="display:flex;justify-content:space-between"><b>${esc(c.name)}</b><span class="muted">${Math.round(commitRatio(c)*100)}%</span></div><div class="progress" style="margin-top:7px"><i style="width:${Math.round(commitRatio(c)*100)}%"></i></div></div>`).join('')||'<div class="muted">No commitments yet.</div>'; goalProgress.innerHTML=state.goals.length?state.goals.map(g=>{let total=g.milestones.length||0, done=g.milestones.filter(m=>m.done).length, pct=total?Math.round(done/total*100):0; return `<div style="margin:12px 0"><div style="display:flex;justify-content:space-between"><b>${esc(g.title)}</b><span class="muted">${pct}%</span></div><div class="progress" style="margin-top:7px"><i style="width:${pct}%"></i></div></div>`}).join(''):'<div class="muted">No goals yet.</div>'; let diff=Math.abs(m-p); let lead=m===p?'Your mental and physical commitments are currently balanced.':m>p?`Mental practice is ${diff} percentage points ahead of physical practice this week.`:`Physical practice is ${diff} percentage points ahead of mental practice this week.`; let lowest=[...state.commitments].sort((a,b)=>commitRatio(a)-commitRatio(b))[0]; insight.textContent=`${lead} ${lowest?`The area with the most room to adjust is “${lowest.name}” at ${Math.round(commitRatio(lowest)*100)}% of its weekly target.`:''} ${state.goals.length?`You currently have ${state.goals.length} active goal${state.goals.length>1?'s':''}; revisit the milestones if momentum feels unclear.`:''}`}

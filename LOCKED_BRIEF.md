@@ -58,3 +58,10 @@ Users can define discrete goals, target dates, and milestones.
 - customizable
 - aware but not punitive
 - calm, reflective, inspiring
+
+
+## v2 interaction additions
+- Optional onboarding Q&A with skip/manual-later path
+- Onboarding may populate name, journey details, guiding intention, goals, core commitments and preferences
+- Dedicated Help / FAQ tab with Quick Start and common operating/deployment answers
+- Chant integrates the supplied YouTube reference recording through streaming/embed, with offline voice fallback
